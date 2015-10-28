@@ -10,6 +10,13 @@ var http = require('http'),
     sys = require('sys'),
     fs = require('fs');
 
+// React server-side rendering
+var React = require('react');
+var ReactDOMServer = require('react-dom/server');
+var jsx = require('node-jsx');
+jsx.install();
+var Homepage = React.createFactory(require('./src/components/Homepage.jsx'))({});
+
 // UglifyJS
 // @link https://github.com/mishoo/UglifyJS2
 var UglifyJS = require("uglify-js");
@@ -40,16 +47,12 @@ app.configure('production', function(){
 
 // Routes
 app.get('/', function(req, res){
-  res.render('index', {
-    title: 'JSCompress.com',
-    js_in: '',
-    js_out: '',
-    test_out: 'if ($( this ).html() == "&lt;&lt;") {  }',
-    err: false
+  res.render('layout', {
+    body: ReactDOMServer.renderToString(Homepage)
   });
 });
 
-app.post('/', function(req, res) {
+app.post('/api/js', function(req, res) {
   /* console.log('Receiving POST...'); */
 
   // Variables
@@ -64,14 +67,13 @@ app.post('/', function(req, res) {
     if(finished) {
       return;
     }
-    /* console.log('---------------------------\n', 'Finished'); */
 
     finished = true;
 
     // Compress JS
     if(_js_in) {
       try {
-        js_out = UglifyJS.minify(_js_in, { fromString: true }).code; // compressed code here
+        js_out = UglifyJS.minify(_js_in, { fromString: true }); // compressed code here
       } catch(e) {
         err = e.message;
       }
@@ -80,16 +82,16 @@ app.post('/', function(req, res) {
     }
 
     // Template
-    res.render('index', {
+    res.json({
+      err: err,
       js_in: js_in,
-      js_out: js_out,
-      err: err
+      js_out: js_out
     });
   };
 
   // JS input only
   try {
-    if("undefined" != typeof(req.body.js_in)) {
+    if("undefined" != typeof req.body.js_in) {
       finish(req.body.js_in);
     }
   } catch (e) {}
@@ -116,5 +118,5 @@ app.post('/', function(req, res) {
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
-  console.log("Express server listening on port %d in %s mode", port, app.settings.env);
+  console.log("Express server listening on http://localhost:%d in %s mode", port, app.settings.env);
 });
