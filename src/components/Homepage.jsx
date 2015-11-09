@@ -1,5 +1,7 @@
-var React = require('react');
-var Ad = require('./Ad.jsx');
+'use strict';
+
+import React from 'react';
+import Ad from './Ad';
 
 var Homepage = React.createClass({
   /**
@@ -18,6 +20,7 @@ var Homepage = React.createClass({
    * Click 'Compress Javascript' button
    */
   handleCompressClick: function (e) {
+    alert('Handle click event!');
     console.log('> handleCompressClick!');
     e.preventDefault();
 
@@ -78,7 +81,7 @@ var Homepage = React.createClass({
               <p>
                 <Ad slot="0991193574" width={728} height={90} />
               </p>
-              <button type="submit" className="submit">Upload Files &amp; Compress Javascript</button>
+              <button type="submit" className="submit" onClick={this.handleUploadClick}>Upload Files &amp; Compress Javascript</button>
             </form>
           </div>
 
@@ -87,7 +90,7 @@ var Homepage = React.createClass({
               <form action="get">
                 <p><textarea name="js_out" id="js_out_textarea" rows="40" cols="80" spellCheck="false" autoComplete="off" autoCorrect="off" autoCapitalize="off" value={ this.state.js_out.replace(/&(?!amp;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') } /></p>
               </form>
-              <button id="js_out_download" className="submit">Download .JS File</button>
+              <button id="js_out_download" className="submit" onClick={this.handleDownloadClick}>Download .JS File</button>
           </div>
         </div>
         <div className="clear"></div>
@@ -128,4 +131,4 @@ var Homepage = React.createClass({
   }
 });
 
-module.exports = Homepage;
+export default Homepage;

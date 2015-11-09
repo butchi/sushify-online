@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -13,9 +12,9 @@ var http = require('http'),
 // React server-side rendering
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
-var jsx = require('node-jsx');
-jsx.install();
-var Homepage = React.createFactory(require('./src/components/Homepage.jsx'))({});
+var jsx = require('node-jsx-babel');
+jsx.install({ extension: '.jsx' });
+var Homepage = React.createFactory(require('./lib/components/Homepage').default)({});
 
 // UglifyJS
 // @link https://github.com/mishoo/UglifyJS2
