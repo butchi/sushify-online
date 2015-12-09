@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import Homepage from './components/Homepage';
 import express from 'express';
 import bodyParser from 'body-parser';
-import UglifyJS from 'uglify-js';
+import UglifyJS from 'sushify-js';
 import _ from 'lodash';
 
 
