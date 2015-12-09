@@ -237,15 +237,15 @@ export default class Homepage extends React.Component {
       <div id="HomepageComponent">
         <div className="box">
           <header>
-            <h1><a href="/">Online Javascript Compression Tool</a></h1>
+            <h1><a href="/">寿司難読化ツール</a></h1>
           </header>
           <section>
             {appErrors}
             <div className="pure-menu pure-menu-horizontal">
               <ul className="pure-menu-list">
-                <li className={this.getLinkClass('code')}><a href="#code" onClick={(e) => this.handleTabClick(e, 'code')} className="pure-menu-link">Copy &amp; Paste Javascript Code</a></li>
-                <li className={this.getLinkClass('files')}><a href="#files" onClick={(e) => this.handleTabClick(e, 'files')} className="pure-menu-link">Upload Javascript Files</a></li>
-                <li className={this.getLinkClass('output')}><a href="#output" onClick={(e) => this.handleTabClick(e, 'output')} className="pure-menu-link">Output</a></li>
+                <li className={this.getLinkClass('code')}><a href="#code" onClick={(e) => this.handleTabClick(e, 'code')} className="pure-menu-link">Javascriptコード入力</a></li>
+                <li className={this.getLinkClass('files')}><a href="#files" onClick={(e) => this.handleTabClick(e, 'files')} className="pure-menu-link">Javascriptファイルアップロード</a></li>
+                <li className={this.getLinkClass('output')}><a href="#output" onClick={(e) => this.handleTabClick(e, 'output')} className="pure-menu-link">出力</a></li>
               </ul>
             </div>
             <div className="tab_container">
@@ -254,20 +254,19 @@ export default class Homepage extends React.Component {
               <div id="js_in" ref="js_in" className={this.getTabClass('code')}>
                 <form action="/api/js" method="post">
                   <textarea name="inputJS" id="inputJS" ref="inputJS" rows="40" cols="80" spellCheck="false" autoComplete="off" autoCorrect="off" autoCapitalize="off" />
-                  <div id="bsap_1304144" className="bsarocks bsap_28c05c8923a305f9880df4be2546b9aa"></div>
-                  <button type="submit" className="pure-button pure-button-primary" onClick={this.handleCompressClick.bind(this)}>Compress Javascript</button>
+                  <button type="submit" className="pure-button pure-button-primary" onClick={this.handleCompressClick.bind(this)}>握る</button>
                 </form>
               </div>
 
               <div id="js_files" ref="js_files" className={this.getTabClass('files')}>
                 <form action="/" method="post" encType="multipart/form-data">
-                  <p>Multiple file uploads will be combined <strong>in order</strong> and compressed together as one file.</p>
+                  <p>アップロード順に単一コードが生成されます。</p>
                   <div id="js_files_fields">
                     {this._renderFileInputs()}
                   </div>
-                  <p><a id="js_files_add" href="#" onClick={this.handleUploadAddFileClick.bind(this)} className="pure-button">+ Add Another File</a></p>
+                  <p><a id="js_files_add" href="#" onClick={this.handleUploadAddFileClick.bind(this)} className="pure-button">+ ファイル追加</a></p>
                   <div id="bsap_1304144" className="bsarocks bsap_28c05c8923a305f9880df4be2546b9aa"></div>
-                  <button type="submit" className="pure-button pure-button-primary" onClick={this.handleUploadClick.bind(this)}>Upload Files &amp; Compress Javascript</button>
+                  <button type="submit" className="pure-button pure-button-primary" onClick={this.handleUploadClick.bind(this)}>アップロード＆握る</button>
                 </form>
               </div>
 
