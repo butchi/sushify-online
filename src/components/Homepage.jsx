@@ -265,7 +265,6 @@ export default class Homepage extends React.Component {
                     {this._renderFileInputs()}
                   </div>
                   <p><a id="js_files_add" href="#" onClick={this.handleUploadAddFileClick.bind(this)} className="pure-button">+ ファイル追加</a></p>
-                  <div id="bsap_1304144" className="bsarocks bsap_28c05c8923a305f9880df4be2546b9aa"></div>
                   <button type="submit" className="pure-button pure-button-primary" onClick={this.handleUploadClick.bind(this)}>アップロード＆握る</button>
                 </form>
               </div>
